@@ -49,7 +49,6 @@ doctrine_mongodb:
             server: mongodb://localhost:27017
             options: {}
     default_database: ncarolina_database
-    default_commit_options:
     document_managers:
         default:
             auto_mapping: true
