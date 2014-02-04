@@ -1,4 +1,4 @@
-var socket = io.connect('http://filesystem.tks-universe:3000');
+var socket = io.connect('http://filesystem.tks-universe.js:3000');
 
 socket.on('tree update', function (data) {
 	console.log(data);
