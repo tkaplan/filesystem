@@ -495,7 +495,7 @@ var newFactoryCtrl = function($scope, $http){
 
 app.controller('newFactoryCtrl',
 	['$scope','$http',newFactoryCtrl]);
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://filesystem.tks-universe:3000');
 
 socket.on('tree update', function (data) {
 	console.log(data);
