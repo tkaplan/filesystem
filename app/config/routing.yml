@@ -1,0 +1,3 @@
+n_carolina_factory:
+    resource: "@NCarolinaFactoryBundle/Resources/config/routing.yml"
+    prefix:   /

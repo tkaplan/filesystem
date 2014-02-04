@@ -1,0 +1,119 @@
+{% extends 'NCarolinaFactoryBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{% stylesheets 
+		'bundles/ncarolinafactory/jstree/dist/themes/default/style.min.css'
+		'bundles/ncarolinafactory/bower_components/bootstrap/dist/css/bootstrap.min.css'
+		filter="cssrewrite"
+	%}
+	<link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+	{% endstylesheets %}
+{% endblock %}
+
+{% block container %}
+	{{ parent() }}
+	<div id="jstree">
+	</div>
+
+	<!-- Create Factory Modal -->
+	<div class="modal fade" id="newFactory" tabindex="-1" role="dialog" aria-labelledby="factoryLabel" aria-hidden="true" ng-controller="newFactoryCtrl">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="factoryLabel">Create New Factory</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<label for="factoryName">Factory Name</label>
+		        	<input type="text" id="factoryName" ng-model="factory.text"></input>
+		        	<br />
+		        	<label for="lowerBound">Lower Bound of Pool</label>
+		        	<input type="text" id="lowerBoud" ng-model="factory.lowerBound"></input>
+		        	<br />
+		        	<label for="upperBound">Upper Bound of Pool</label>
+		        	<input type="text" id="upperBound" ng-model="factory.upperBound"></input>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" ng-click="create()" class="btn btn-primary">Create</button>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
+
+	<!-- Generate Output Modal -->
+	<div class="modal fade" id="generateOutput" tabindex="-1" role="dialog" aria-labelledby="outputLabel" aria-hidden="true" ng-controller="generateOutputCtrl">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="outputLabel">Generate Output</h4>
+		      	</div>
+		      	<div class="modal-body">
+		      		<p>Please put in the number of outputs &le; {|output.limit|}</p>
+		        	<label for="outputNumber">Output Number</label>
+		        	<input ng-model="output.number" type="text"></input>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" ng-click="generate()" class="btn btn-primary">Generate</button>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
+
+	<!-- Button trigger modal -->
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createRoot">
+		Create Root
+	</button>
+
+	<!-- Create Root Modal -->
+	<div class="modal fade" id="createRoot" tabindex="-1" role="dialog" aria-labelledby="rootLabel" aria-hidden="true" ng-controller="createRootCtrl">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="factoryLabel">Create New Root</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<label for="root">Root Name</label>
+		        	<input type="text" ng-model="root.text" id="rootName"></input>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" ng-click="create()" class="btn btn-primary">Create</button>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
+
+{% endblock %}
+
+{% block javascript %}
+	<script>
+		// Paths for REST Calls
+		var _path_create_root = "{{ path('n_carolina_post_root') }}";
+		var _path_create_factory = "{{ path('n_carolina_post_factory') }}";
+		var _path_generate_output = "{{ path('n_carolina_post_generate') }}";
+		var _path_get_tree = "{{ path('n_carolina_get_tree') }}";
+		var _path_delete_factory_output = "{{ path('n_carolina_delete_factory_output') }}";
+		var _path_delete_tree_node = "{{ path('n_carolina_delete_tree_node') }}";
+	</script>
+	{{ parent() }}
+	{% javascripts 
+		'@NCarolinaFactoryBundle/Resources/public/bower_components/jquery/jquery.min.js'
+		'@NCarolinaFactoryBundle/Resources/public/bower_components/angular/angular.min.js'
+		'@NCarolinaFactoryBundle/Resources/public/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/socket.io/config.socket.js'
+		'@NCarolinaFactoryBundle/Resources/public/jstree/dist/jstree.min.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/jquery/jstree.configure.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/angular/angular.configure.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/angular/controllers/createRootCtrl.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/angular/controllers/generateOutputCtrl.js'
+		'@NCarolinaFactoryBundle/Resources/public/js/angular/controllers/newFactoryCtrl.js'
+		'@NCarolinaFactoryBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
+	%}
+	<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}

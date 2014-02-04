@@ -1,0 +1,39 @@
+n_carolina_factory_homepage:
+    pattern:  /
+    defaults: { _controller: NCarolinaFactoryBundle:Home:index }
+
+n_carolina_post_factory:
+    pattern: /factory
+    defaults: { _controller: NCarolinaFactoryBundle:Factory:postFactory }
+    requirements:
+        _methods: POST
+
+n_carolina_post_generate:
+    pattern: /factory/generate
+    defaults: { _controller: NCarolinaFactoryBundle:Factory:postGenerateOutput }
+    requirements:
+        _methods: POST
+
+n_carolina_post_root:
+    pattern: /root
+    defaults: { _controller: NCarolinaFactoryBundle:Root:postRoot }
+    requirements:
+        _methods: POST
+
+n_carolina_get_tree:
+    pattern: /tree
+    defaults: { _controller: NCarolinaFactoryBundle:Tree:getTree }
+    requirements:
+        _methods: GET
+
+n_carolina_delete_factory_output:
+    pattern: /tree/factory/output
+    defaults: { _controller: NCarolinaFactoryBundle:Tree:deleteFactoryOutput }
+    requirements:
+        _methods: POST
+
+n_carolina_delete_tree_node:
+    pattern: /tree/node
+    defaults: { _controller: NCarolinaFactoryBundle:Tree:deleteNode }
+    requirements:
+        _methods: POST

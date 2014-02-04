@@ -1,0 +1,14 @@
+NCarolina\FactoryBundle\Document\Root:
+    type: document
+    fields:
+        id:
+            id: true
+            strategy: UUID 
+        type:
+            type: string
+        text:
+            type: string
+    referenceMany:
+        children:
+            targetDocument: ~
+            cascade: "remove"

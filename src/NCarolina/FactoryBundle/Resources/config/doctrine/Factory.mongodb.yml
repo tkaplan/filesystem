@@ -1,0 +1,20 @@
+NCarolina\FactoryBundle\Document\Factory:
+    type: document
+    fields:
+        id:
+            id: true
+            strategy: UUID
+        type:
+            type: string
+        text:
+            type: string
+        lowerBound:
+            type: int
+        upperBound:
+            type: int
+        pool:
+            type: hash
+        output:
+            type: hash
+    referenceOne:
+        parent: ~

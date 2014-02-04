@@ -1,0 +1,7 @@
+parameters:
+    ncf.json_request.class: NCarolina\FactoryBundle\Services\JSONRequest
+
+services:
+    ncf.json_request:
+        class: %ncf.json_request.class%
+        arguments: ['@service_container']
